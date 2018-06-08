@@ -87,6 +87,7 @@ public class Snake{
 		System.out.println();
 	}
 
+	//not working at the moment
 	public static boolean inArray(List<int[]> player, int[] next){
 		for(int x=0;x<player.size()-1;x++){
 			System.out.println("in");
@@ -96,7 +97,6 @@ public class Snake{
 				return true;
 			}
 		}
-		System.out.println("false");
 		return false;
 	}
 
