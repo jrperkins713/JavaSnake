@@ -6,7 +6,7 @@ public class Snake{
 		List<int[]> playerPos = new ArrayList<int[]>();
 		int[] nextPos = {5,5}, lastPos;
 		playerPos.add(nextPos);
-		int code, score = 2;
+		int code, score = 0;
 		String dir = "none";
 		Grid grid = new Grid(20,20);
 		grid.setColor(5,5,Color.red);
@@ -20,18 +20,23 @@ public class Snake{
 			}
 			switch(code){
 				case 87:
-					dir="up";
+					if(!dir.equals("down"))
+						dir="up";
 					break;
 				case 65:
-					dir="left";
+					if(!dir.equals("right"))
+						dir="left";
 					break;
 				case 83:
-					dir="down";
+					if(!dir.equals("up"))
+						dir="down";
 					break;
 				case 68:
-					dir="right";
+					if(!dir.equals("left"))
+						dir="right";
 					break;
 			}
+
 			if(dir.equals("up"))
 				nextPos[1]--;
 			if(dir.equals("down"))
@@ -41,15 +46,17 @@ public class Snake{
 			if(dir.equals("right"))
 				nextPos[0]++;
 			playerPos.add(nextPos);
-			printArray(playerPos);
 
-			if(playerPos.size()>=score+3){
+			if(playerPos.size()>=score+2){
 				lastPos = playerPos.remove(0);
 				grid.setColor(lastPos[1],lastPos[0], Color.white);
 			}
-			printArray(playerPos);
-
-			grid.setColor(nextPos[1],nextPos[0], Color.red);
+			try{
+				grid.setColor(nextPos[1],nextPos[0], Color.red);
+			}
+			catch(Exception e){
+				break;
+			}
 
 			nextPos = new int[2];
 			nextPos[0] = playerPos.get(playerPos.size()-1)[0];
@@ -58,6 +65,7 @@ public class Snake{
 
 
 		}
+		System.out.println("Game Over. Your score was "+score);
 
 	}
 	public static void printArray(List<int[]> arr){
