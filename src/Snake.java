@@ -7,6 +7,7 @@ public class Snake{
 		int[] nextPos = {5,10}, lastPos, coinPos = randPos();
 		playerPos.add(nextPos);
 		int code, score = 0;
+		boolean lose= false;
 		String dir = "none";
 		Grid grid = new Grid(20,20);
 		grid.setColor(coinPos[1],coinPos[0],Color.yellow);
@@ -47,8 +48,23 @@ public class Snake{
 			if(dir.equals("right"))
 				nextPos[0]++;
 			playerPos.add(nextPos);
+			if(samePos(nextPos,coinPos)){
+				score++;
+				while(inArray(playerPos,coinPos)){
+					coinPos = randPos();
+				}
+				grid.setColor(coinPos[1],coinPos[0],Color.yellow);
+			}
+			if(playerPos.size()>3){
+				for(int i=0;i<playerPos.size()-1;i++){
+					if(samePos(playerPos.get(i),nextPos))
+						lose = true;
+				}
+			}
+			if(lose)
+				break;
 
-			if(playerPos.size()>=score+2){
+			if(playerPos.size()>=score+3){
 				lastPos = playerPos.remove(0);
 				grid.setColor(lastPos[1],lastPos[0], Color.white);
 			}
@@ -58,18 +74,7 @@ public class Snake{
 			catch(Exception e){
 				break;
 			}
-			if(samePos(nextPos,coinPos)){
-				System.out.println("Event");
-				score++;
-				printArray(playerPos);
-				System.out.println(coinPos[1]+" "+coinPos[0]);
-				while(inArray(playerPos,coinPos)){
-					coinPos = randPos();
-					System.out.println("Move!");
-				}
-				System.out.println("passed");
-				grid.setColor(coinPos[1],coinPos[0],Color.yellow);
-			}
+
 
 			nextPos = new int[2];
 			nextPos[0] = playerPos.get(playerPos.size()-1)[0];
@@ -87,12 +92,9 @@ public class Snake{
 		System.out.println();
 	}
 
-	//not working at the moment
+
 	public static boolean inArray(List<int[]> player, int[] next){
-		for(int x=0;x<player.size()-1;x++){
-			System.out.println("in");
-			System.out.println(player.get(x)[1]+" "+player.get(x)[0]);
-			System.out.println(next[1]+" "+next[0]);
+		for(int x=1;x<player.size();x++){
 			if(samePos(player.get(x),next)){
 				return true;
 			}
@@ -108,7 +110,7 @@ public class Snake{
 
 	public static int[] randPos(){
 		Random rand = new Random();
-		int[] temp = {rand.nextInt(5),rand.nextInt(5)};
+		int[] temp = {rand.nextInt(20),rand.nextInt(20)};
 		return temp;
 	}
 }
