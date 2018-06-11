@@ -72,6 +72,8 @@ public class Snake{
 				grid.setColor(nextPos[1],nextPos[0], Color.red);
 			}
 			catch(Exception e){
+				int square = playerPos.size()-2;
+				grid.setColor(playerPos.get(square)[1],playerPos.get(square)[0],Color.gray);
 				break;
 			}
 
