@@ -66,7 +66,7 @@ public class Snake{
 				break;
 			}
 
-			if(playerPos.size()>=score+3){
+			if(playerPos.size()>=score*10+1){
 				lastPos = playerPos.remove(0);
 				grid.setColor(lastPos[1],lastPos[0], Color.white);
 			}
