@@ -9,13 +9,13 @@ public class Snake{
 		int code, score = 0;
 		boolean lose= false;
 		String dir = "none";
-		Grid grid = new Grid(20,20);
+		Grid grid = new Grid(20,20,700);
 		grid.setColor(coinPos[1],coinPos[0],Color.yellow);
 		grid.setColor(nextPos[1],nextPos[0],Color.red);
 		while (true){
 			code = grid.getCode();
 			try {
-				Thread.sleep(175);
+				Thread.sleep(125);
 			}
 			catch(Exception e) {
 

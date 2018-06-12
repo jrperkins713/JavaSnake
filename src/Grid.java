@@ -10,10 +10,10 @@ public class Grid{
 	private Container pane;
 	private int durp;
 
-	public Grid(int x, int y){
+	public Grid(int x, int y, int size){
 		grid = new JPanel[x][y];
 		theGUI = new JFrame();
-		theGUI.setSize(500,500);
+		theGUI.setSize(size,size);
 		pane = theGUI.getContentPane();
 
 		pane.setLayout(new GridLayout(x,y));
