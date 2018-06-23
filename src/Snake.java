@@ -1,6 +1,15 @@
 import java.util.*;
 import java.awt.Color;
 public class Snake{
+
+	private static int GameLoopMillis = 120;
+	private static int InputSleepMillis = GameLoopMillis / 10;
+
+	private static void SafeSleep(int millis) {
+		try { Thread.sleep(millis); }
+		catch(Exception ignore) {}
+	}
+
 	public static void main(String[] args){
 		Scanner vReader = new Scanner(System.in);
 		List<int[]> playerPos = new ArrayList<int[]>();
@@ -13,13 +22,15 @@ public class Snake{
 		grid.setColor(coinPos[1],coinPos[0],Color.yellow);
 		grid.setColor(nextPos[1],nextPos[0],Color.red);
 		while (true){
-			code = grid.getCode();
-			try {
-				Thread.sleep(125);
-			}
-			catch(Exception e) {
 
+			int loopTimeMillis = 0;
+			code = 0;
+			while (code == 0 && loopTimeMillis < GameLoopMillis) {
+				code = grid.getCode();
+				SafeSleep(InputSleepMillis);
+				loopTimeMillis += InputSleepMillis;
 			}
+
 			switch(code){
 				case 87:
 					if(!dir.equals("down"))
