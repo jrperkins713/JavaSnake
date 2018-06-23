@@ -48,6 +48,22 @@ public class Snake{
 					if(!dir.equals("left"))
 						dir="right";
 					break;
+				case 38:
+					if(!dir.equals("down"))
+						dir="up";
+					break;
+				case 37:
+					if(!dir.equals("right"))
+						dir="left";
+					break;
+				case 40:
+					if(!dir.equals("up"))
+						dir="down";
+					break;
+				case 39:
+					if(!dir.equals("left"))
+						dir="right";
+					break;
 			}
 
 			if(dir.equals("up"))
@@ -77,7 +93,8 @@ public class Snake{
 				break;
 			}
 
-			if(playerPos.size()>=score*2+1){
+
+			if(playerPos.size()>=2*score +1){
 				lastPos = playerPos.remove(0);
 				grid.setColor(lastPos[1],lastPos[0], Color.white);
 			}
@@ -86,7 +103,11 @@ public class Snake{
 			}
 			catch(Exception e){
 				int square = playerPos.size()-2;
-				grid.setColor(playerPos.get(square)[1],playerPos.get(square)[0],Color.gray);
+				try{
+					grid.setColor(playerPos.get(square)[1],playerPos.get(square)[0],Color.gray);
+				}
+				catch(Exception x){
+				}
 				break;
 			}
 
